@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Sheets Embedder | Data Visualization</title>
+    <title>Presentation Helper | Section I</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
@@ -22,710 +22,232 @@
             --secondary: #34a853;
             --accent: #fbbc05;
             --danger: #ea4335;
-            --light: #f8f9fa;
+            --light: #ffffff;
             --dark: #202124;
             --gray: #5f6368;
             --gray-light: #dadce0;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
-            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            --gradient: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
-            
-            /* Dark theme variables */
-            --bg-primary: #f5f7fa;
-            --bg-secondary: #ffffff;
-            --text-primary: #202124;
-            --text-secondary: #5f6368;
+            --bg-body: #f0f2f5;
             --card-bg: #ffffff;
-            --border-color: #dadce0;
+            --border-color: #e0e0e0;
+            --shadow: 0 2px 4px rgba(0,0,0,0.05);
+            --transition: all 0.2s ease;
         }
         
         body.dark-theme {
-            --bg-primary: #121212;
-            --bg-secondary: #1e1e1e;
+            --bg-body: #121212;
+            --card-bg: #1e1e1e;
+            --light: #1e1e1e;
+            --dark: #e8eaed;
             --text-primary: #e8eaed;
             --text-secondary: #9aa0a6;
-            --card-bg: #2d2d2d;
             --border-color: #3c4043;
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.4);
-            --light: #2d2d2d;
-            --gray-light: #3c4043;
         }
         
         body {
-            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
-            color: var(--text-primary);
-            line-height: 1.6;
-            min-height: 100vh;
-            padding: 20px;
+            background-color: var(--bg-body);
+            color: var(--dark);
+            height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            position: relative;
-            overflow-x: hidden;
+            overflow: hidden; /* Prevent body scroll, let sheet scroll */
             transition: var(--transition);
         }
-        
-        /* Background decorative elements */
-        .bg-shape {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0.03;
-            z-index: -1;
-        }
-        
-        .shape-1 {
-            width: 300px;
-            height: 300px;
-            background: var(--primary);
-            top: -150px;
-            right: -150px;
-        }
-        
-        .shape-2 {
-            width: 200px;
-            height: 200px;
-            background: var(--secondary);
-            bottom: -100px;
-            left: -100px;
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 1400px;
-            background: var(--card-bg);
-            border-radius: 20px;
-            box-shadow: var(--shadow-lg);
-            overflow: hidden;
-            margin-top: 20px;
-            transform: translateY(20px);
-            opacity: 0;
-            animation: fadeInUp 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
-            position: relative;
-            z-index: 10;
-            transition: var(--transition);
-        }
-        
-        @keyframes fadeInUp {
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-        
+
+        /* Compact Header */
         header {
-            background: var(--gradient);
-            color: white;
-            padding: 40px 30px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
-            background-size: cover;
-        }
-        
-        header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--danger), var(--accent), var(--secondary), var(--primary));
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-        
-        .logo-icon {
-            font-size: 2.5rem;
-            background: rgba(255, 255, 255, 0.2);
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(5px);
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        h1 {
-            font-size: 2.8rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            font-weight: 300;
-            max-width: 700px;
-            margin: 0 auto;
-            line-height: 1.5;
-        }
-        
-        .content {
-            padding: 40px;
-        }
-        
-        .sheet-info {
-            background-color: var(--light);
-            padding: 25px;
-            border-radius: 12px;
-            margin-bottom: 30px;
-            border-left: 5px solid var(--primary);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .sheet-info::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 5px;
-            height: 100%;
-            background: var(--gradient);
-            transition: width 0.5s ease;
-        }
-        
-        .sheet-info:hover::before {
-            width: 100%;
-            opacity: 0.05;
-        }
-        
-        .sheet-info:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .sheet-details h3 {
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-            font-weight: 600;
-            font-size: 1.2rem;
-        }
-        
-        .sheet-url {
-            color: var(--primary);
-            font-size: 0.95rem;
-            word-break: break-all;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .status-indicator {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--secondary);
-            color: white;
+            background: var(--card-bg);
             padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 0.95rem;
-            font-weight: 500;
-            box-shadow: 0 4px 10px rgba(52, 168, 83, 0.3);
-            transition: var(--transition);
-        }
-        
-        .status-indicator:hover {
-            transform: scale(1.05);
-        }
-        
-        .sheet-container {
-            margin-top: 30px;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            border: 1px solid var(--border-color);
-            transition: var(--transition);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.8s 0.3s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
-        }
-        
-        .sheet-container:hover {
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-        }
-        
-        .sheet-header {
-            background: linear-gradient(to right, var(--light), #e8f0fe);
-            padding: 18px 25px;
             border-bottom: 1px solid var(--border-color);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            height: 60px;
+            box-shadow: var(--shadow);
+            z-index: 100;
         }
-        
-        .sheet-title {
-            font-weight: 600;
-            color: var(--text-primary);
+
+        .logo-area {
             display: flex;
             align-items: center;
             gap: 12px;
-            font-size: 1.3rem;
         }
-        
-        .sheet-actions {
-            display: flex;
-            gap: 15px;
+
+        .logo-icon {
+            font-size: 1.5rem;
+            color: var(--secondary);
         }
-        
-        button {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            font-size: 15px;
+
+        h1 {
+            font-size: 1.2rem;
             font-weight: 600;
+            color: var(--dark);
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-left: 10px;
+            border-left: 1px solid var(--border-color);
+            padding-left: 10px;
+        }
+
+        /* Main Workspace */
+        .main-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+            max-width: 100%;
+            height: calc(100vh - 60px);
+        }
+
+        .sheet-wrapper {
+            background: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .toolbar {
+            padding: 10px 15px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--light);
+        }
+
+        .toolbar-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--secondary);
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
             cursor: pointer;
             transition: var(--transition);
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
-            position: relative;
-            overflow: hidden;
+            gap: 8px;
+            background: var(--bg-body);
+            color: var(--dark);
         }
-        
-        button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
+
+        button:hover {
+            background: var(--border-color);
         }
-        
-        button:hover::before {
-            left: 100%;
-        }
-        
+
         .btn-primary {
             background: var(--primary);
             color: white;
-            box-shadow: 0 4px 10px rgba(26, 115, 232, 0.3);
+            border-color: var(--primary);
         }
-        
+
         .btn-primary:hover {
             background: var(--primary-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 7px 15px rgba(26, 115, 232, 0.4);
+            border-color: var(--primary-dark);
         }
-        
-        .btn-secondary {
-            background: var(--light);
-            color: var(--text-secondary);
-            border: 1px solid var(--border-color);
+
+        /* The Iframe Area - The most important part */
+        .iframe-container {
+            flex: 1; /* Takes all remaining height */
+            position: relative;
+            background: #fff;
         }
-        
-        .btn-secondary:hover {
-            background: #e8eaed;
-            transform: translateY(-3px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .btn-accent {
-            background: var(--accent);
-            color: var(--dark);
-            box-shadow: 0 4px 10px rgba(251, 188, 5, 0.3);
-        }
-        
-        .btn-accent:hover {
-            background: #f9ab00;
-            transform: translateY(-3px);
-        }
-        
-        .btn-dark {
-            background: var(--dark);
-            color: white;
-            box-shadow: 0 4px 10px rgba(32, 33, 36, 0.3);
-        }
-        
-        .btn-dark:hover {
-            background: #000;
-            transform: translateY(-3px);
-        }
-        
+
         iframe {
             width: 100%;
-            height: 650px;
+            height: 100%;
             border: none;
-            background: white;
-            transition: height 0.5s ease;
+            display: block;
         }
-        
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 50px;
-        }
-        
-        .feature-card {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            text-align: center;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            border-top: 4px solid transparent;
-        }
-        
-        .feature-card:nth-child(1) {
-            border-top-color: var(--primary);
-        }
-        
-        .feature-card:nth-child(2) {
-            border-top-color: var(--secondary);
-        }
-        
-        .feature-card:nth-child(3) {
-            border-top-color: var(--accent);
-        }
-        
-        .feature-card::before {
-            content: '';
-            position: absolute;
+
+        /* Fullscreen Override */
+        .is-fullscreen {
+            position: fixed !important;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 5px;
-            background: var(--gradient);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.5s ease;
+            width: 100vw;
+            height: 100vh;
+            z-index: 9999;
+            border-radius: 0;
         }
         
-        .feature-card:hover::before {
-            transform: scaleX(1);
+        .is-fullscreen .toolbar {
+            background: #f8f9fa; /* Ensure visible toolbar in fullscreen */
         }
-        
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+
+        /* Utilities */
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--gray);
+            cursor: pointer;
+            padding: 5px;
         }
-        
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            height: 80px;
-            width: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            background: var(--light);
-            transition: var(--transition);
-        }
-        
-        .feature-card:nth-child(1) .feature-icon {
-            color: var(--primary);
-            background: rgba(26, 115, 232, 0.1);
-        }
-        
-        .feature-card:nth-child(2) .feature-icon {
-            color: var(--secondary);
-            background: rgba(52, 168, 83, 0.1);
-        }
-        
-        .feature-card:nth-child(3) .feature-icon {
-            color: var(--accent);
-            background: rgba(251, 188, 5, 0.1);
-        }
-        
-        .feature-card:hover .feature-icon {
-            transform: scale(1.1) rotate(5deg);
-        }
-        
-        .feature-card h4 {
-            margin-bottom: 15px;
-            color: var(--text-primary);
-            font-size: 1.3rem;
-        }
-        
-        .feature-card p {
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-        
-        .instructions {
-            margin-top: 60px;
-            padding: 35px;
-            background: var(--light);
-            border-radius: 12px;
-            border-left: 5px solid var(--secondary);
-            box-shadow: var(--shadow);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .instructions::before {
-            content: '';
+
+        .loader-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(52, 168, 83, 0.03)"/></svg>');
-            background-size: cover;
-        }
-        
-        .instructions h3 {
-            margin-bottom: 20px;
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-size: 1.5rem;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .instructions ol {
-            margin-left: 20px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .instructions li {
-            margin-bottom: 15px;
-            line-height: 1.6;
-            color: var(--text-secondary);
-            position: relative;
-            padding-left: 10px;
-        }
-        
-        .instructions li::before {
-            content: '';
-            position: absolute;
-            left: -10px;
-            top: 10px;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--secondary);
-        }
-        
-        .instructions code {
-            background-color: var(--border-color);
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-family: monospace;
-            font-size: 0.9rem;
-            color: var(--text-primary);
-        }
-        
-        footer {
-            text-align: center;
-            padding: 30px;
-            margin-top: 50px;
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            width: 100%;
-            max-width: 1400px;
-            border-top: 1px solid var(--border-color);
-        }
-        
-        .footer-links {
+            background: rgba(255,255,255,0.8);
             display: flex;
             justify-content: center;
-            gap: 30px;
-            margin-top: 15px;
+            align-items: center;
+            z-index: 10;
         }
         
-        .footer-links a {
-            color: var(--primary);
-            text-decoration: none;
-            transition: var(--transition);
+        body.dark-theme .loader-overlay {
+            background: rgba(30,30,30,0.8);
         }
-        
-        .footer-links a:hover {
-            color: var(--primary-dark);
-            text-decoration: underline;
-        }
-        
-        /* Loading animation */
-        .loader {
-            display: none;
-            text-align: center;
-            padding: 20px;
-        }
-        
-        .loader-spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid rgba(26, 115, 232, 0.2);
-            border-left: 4px solid var(--primary);
+
+        .spinner {
+            width: 30px;
+            height: 30px;
+            border: 3px solid var(--gray-light);
+            border-top: 3px solid var(--primary);
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin: 0 auto;
         }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        /* Toast notification */
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: var(--dark);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transform: translateX(150%);
-            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-            z-index: 1000;
-        }
-        
-        .toast.show {
-            transform: translateX(0);
-        }
-        
-        /* Theme toggle */
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1001;
-        }
-        
-        .theme-toggle button {
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-        }
-        
-        /* Responsive design */
-        @media (max-width: 992px) {
-            .sheet-header {
-                flex-direction: column;
-                gap: 20px;
-                align-items: flex-start;
-            }
-            
-            .sheet-actions {
-                width: 100%;
-                justify-content: space-between;
-            }
-            
-            iframe {
-                height: 500px;
-            }
-        }
-        
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Mobile tweaks */
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2.2rem;
-            }
-            
-            .content {
-                padding: 25px;
-            }
-            
-            .sheet-info {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
-            }
-            
-            .features {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-links {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            iframe {
-                height: 400px;
-            }
-            
-            .theme-toggle {
-                top: 10px;
-                right: 10px;
-            }
-            
-            .theme-toggle button {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-            }
-        }
-        
-        /* Fullscreen mode */
-        .fullscreen-mode {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--card-bg);
-            z-index: 1000;
-            display: none;
-            flex-direction: column;
-        }
-        
-        .fullscreen-header {
-            padding: 15px 20px;
-            background: var(--light);
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .fullscreen-iframe {
-            flex: 1;
-            width: 100%;
-            border: none;
+            .subtitle { display: none; }
+            .toolbar-title span { display: none; }
+            button span { display: none; }
+            header { padding: 10px; }
+            .main-container { padding: 5px; }
         }
     </style>
 </head>
@@ -733,332 +255,113 @@
     <div id="root"></div>
     
     <script type="text/babel">
-        const { useState, useEffect } = React;
+        const { useState, useEffect, useRef } = React;
         
-        // Theme Toggle Component
-        function ThemeToggle({ isDark, toggleTheme }) {
-            return (
-                <div className="theme-toggle">
-                    <button 
-                        className={isDark ? "btn-dark" : "btn-secondary"} 
-                        onClick={toggleTheme}
-                        title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
-                    >
-                        <i className={isDark ? "fas fa-sun" : "fas fa-moon"}></i>
-                    </button>
-                </div>
-            );
-        }
-        
-        // Sheet Info Component
-        function SheetInfo() {
-            return (
-                <div className="sheet-info">
-                    <div className="sheet-details">
-                        <h3>Embedded Sheet</h3>
-                        <p className="sheet-url">
-                            <i className="fas fa-link"></i>
-                            https://docs.google.com/spreadsheets/d/1ZtemLdXt5RWd_0BPZSdFo6ftUlCV-9zjqarWru9cVvk/edit
-                        </p>
-                    </div>
-                    <div className="status-indicator">
-                        <i className="fas fa-check-circle"></i> Successfully Embedded & Synchronized
-                    </div>
-                </div>
-            );
-        }
-        
-        // Sheet Container Component
-        function SheetContainer() {
-            const [isLoading, setIsLoading] = useState(false);
-            const [isRefreshing, setIsRefreshing] = useState(false);
-            const [isProcessing, setIsProcessing] = useState(false);
-            const [isFullscreen, setIsFullscreen] = useState(false);
-            
-            const sheetUrl = "https://docs.google.com/spreadsheets/d/1ZtemLdXt5RWd_0BPZSdFo6ftUlCV-9zjqarWru9cVvk/edit";
-            
-            // Simulate loading when component mounts
-            useEffect(() => {
-                setIsLoading(true);
-                const timer = setTimeout(() => {
-                    setIsLoading(false);
-                }, 1500);
-                
-                return () => clearTimeout(timer);
-            }, []);
-            
-            const handleRefresh = () => {
-                setIsRefreshing(true);
-                setIsLoading(true);
-                
-                setTimeout(() => {
-                    setIsRefreshing(false);
-                    setIsLoading(false);
-                    showToast('Sheet refreshed successfully');
-                }, 800);
-            };
-            
-            const handleFullscreen = () => {
-                setIsFullscreen(true);
-                document.body.style.overflow = 'hidden';
-                showToast('Entered fullscreen mode');
-            };
-            
-            const handleExitFullscreen = () => {
-                setIsFullscreen(false);
-                document.body.style.overflow = 'auto';
-                showToast('Exited fullscreen mode');
-            };
-            
-            const handleDownload = () => {
-                setIsProcessing(true);
-                showToast('Export initiated. Preparing your download...');
-                
-                setTimeout(() => {
-                    setIsProcessing(false);
-                    showToast('Data exported successfully. Check your downloads.');
-                }, 2000);
-            };
-            
-            return (
-                <>
-                    <div className="sheet-container">
-                        <div className="sheet-header">
-                            <div className="sheet-title">
-                                <i className="fas fa-file-excel"></i> 
-                                <span>Sales Data Dashboard</span>
-                            </div>
-                            <div className="sheet-actions">
-                                <button 
-                                    className={`btn-primary ${isRefreshing ? 'refreshing' : ''}`} 
-                                    onClick={handleRefresh}
-                                    disabled={isLoading}
-                                >
-                                    <i className={isRefreshing ? "fas fa-spinner fa-spin" : "fas fa-sync-alt"}></i> 
-                                    {isRefreshing ? "Refreshing" : "Refresh"}
-                                </button>
-                                <button className="btn-accent" onClick={handleFullscreen}>
-                                    <i className="fas fa-expand"></i> Fullscreen
-                                </button>
-                                <button 
-                                    className="btn-secondary" 
-                                    onClick={handleDownload}
-                                    disabled={isProcessing}
-                                >
-                                    <i className={isProcessing ? "fas fa-spinner fa-spin" : "fas fa-download"}></i> 
-                                    {isProcessing ? "Processing" : "Export"}
-                                </button>
-                            </div>
-                        </div>
-                        <div className="loader" style={{display: isLoading ? 'block' : 'none'}}>
-                            <div className="loader-spinner"></div>
-                            <p>Loading sheet data...</p>
-                        </div>
-                        <iframe 
-                            id="sheet-iframe" 
-                            src={sheetUrl} 
-                            title="Sales Data Dashboard"
-                            style={{display: isLoading ? 'none' : 'block'}}
-                        ></iframe>
-                    </div>
-                    
-                    {/* Fullscreen Modal */}
-                    <div 
-                        className="fullscreen-mode" 
-                        style={{display: isFullscreen ? 'flex' : 'none'}}
-                    >
-                        <div className="fullscreen-header">
-                            <div className="sheet-title">
-                                <i className="fas fa-file-excel"></i> 
-                                <span>Sales Data Dashboard - Fullscreen View</span>
-                            </div>
-                            <button className="btn-secondary" onClick={handleExitFullscreen}>
-                                <i className="fas fa-compress"></i> Exit Fullscreen
-                            </button>
-                        </div>
-                        <iframe 
-                            className="fullscreen-iframe" 
-                            id="fullscreen-iframe" 
-                            src={sheetUrl}
-                        ></iframe>
-                    </div>
-                </>
-            );
-        }
-        
-        // Features Component
-        function Features() {
-            const features = [
-                {
-                    icon: "fas fa-bolt",
-                    title: "Real-time Sync",
-                    description: "Automatically updates when changes are made to the source spreadsheet with live synchronization."
-                },
-                {
-                    icon: "fas fa-shield-alt",
-                    title: "Secure Embedding",
-                    description: "Advanced security protocols ensure your data remains protected while being accessible."
-                },
-                {
-                    icon: "fas fa-chart-line",
-                    title: "Data Visualization",
-                    description: "Interactive charts and graphs that transform your spreadsheet data into actionable insights."
-                }
-            ];
-            
-            return (
-                <div className="features">
-                    {features.map((feature, index) => (
-                        <div key={index} className="feature-card">
-                            <div className="feature-icon">
-                                <i className={feature.icon}></i>
-                            </div>
-                            <h4>{feature.title}</h4>
-                            <p>{feature.description}</p>
-                        </div>
-                    ))}
-                </div>
-            );
-        }
-        
-        // Instructions Component
-        function Instructions() {
-            return (
-                <div className="instructions">
-                    <h3><i className="fas fa-info-circle"></i> About This Professional Embedding</h3>
-                    <ol>
-                        <li>This embedded sheet uses <strong>advanced synchronization technology</strong> to ensure data is always up-to-date.</li>
-                        <li>The <strong>responsive design</strong> adapts to all screen sizes while maintaining readability.</li>
-                        <li>Use the <strong>Fullscreen mode</strong> for immersive data analysis with distraction-free viewing.</li>
-                        <li><strong>Export functionality</strong> allows you to download the current view in multiple formats.</li>
-                        <li>Professional-grade <strong>security measures</strong> protect your data integrity.</li>
-                    </ol>
-                </div>
-            );
-        }
-        
-        // Footer Component
-        function Footer() {
-            return (
-                <footer>
-                    <p>Professional Sheets Embedder &copy; 2023 | Enterprise-Grade Data Visualization Solution</p>
-                    <div className="footer-links">
-                        <a href="#"><i className="fas fa-shield-alt"></i> Privacy Policy</a>
-                        <a href="#"><i className="fas fa-file-contract"></i> Terms of Service</a>
-                        <a href="#"><i className="fas fa-envelope"></i> Contact Support</a>
-                        <a href="#"><i className="fas fa-question-circle"></i> Documentation</a>
-                    </div>
-                </footer>
-            );
-        }
-        
-        // Toast Component
-        function Toast({ message, show }) {
-            return (
-                <div className={`toast ${show ? 'show' : ''}`} id="toast">
-                    <i className="fas fa-check-circle"></i>
-                    <span id="toast-message">{message}</span>
-                </div>
-            );
-        }
-        
-        // Main App Component
         function App() {
             const [isDark, setIsDark] = useState(false);
-            const [toast, setToast] = useState({ show: false, message: '' });
-            
-            // Initialize theme from localStorage or system preference
+            const [isLoading, setIsLoading] = useState(true);
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [refreshKey, setRefreshKey] = useState(0); // Used to force reload iframe
+            const sheetUrl = "https://docs.google.com/spreadsheets/d/1ZtemLdXt5RWd_0BPZSdFo6ftUlCV-9zjqarWru9cVvk/edit?widget=true&headers=false";
+
+            // Theme Logic
             useEffect(() => {
                 const savedTheme = localStorage.getItem('theme');
-                const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                
-                if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+                if (savedTheme === 'dark') {
                     setIsDark(true);
                     document.body.classList.add('dark-theme');
                 }
                 
-                // Show welcome toast
-                setTimeout(() => {
-                    showToast('Professional Sheets Embedder loaded successfully');
-                }, 1000);
+                // Initial load simulation
+                setTimeout(() => setIsLoading(false), 1000);
             }, []);
-            
+
             const toggleTheme = () => {
-                const newDarkMode = !isDark;
-                setIsDark(newDarkMode);
-                
-                if (newDarkMode) {
+                const newMode = !isDark;
+                setIsDark(newMode);
+                if (newMode) {
                     document.body.classList.add('dark-theme');
                     localStorage.setItem('theme', 'dark');
                 } else {
                     document.body.classList.remove('dark-theme');
                     localStorage.setItem('theme', 'light');
                 }
-                
-                showToast(`Switched to ${newDarkMode ? 'dark' : 'light'} theme`);
             };
-            
-            const showToast = (message) => {
-                setToast({ show: true, message });
-                setTimeout(() => {
-                    setToast({ show: false, message: '' });
-                }, 3000);
+
+            const handleRefresh = () => {
+                setIsLoading(true);
+                setRefreshKey(prev => prev + 1);
+                setTimeout(() => setIsLoading(false), 1500);
             };
-            
-            // Add parallax effect to background shapes on scroll
-            useEffect(() => {
-                const handleScroll = () => {
-                    const scrolled = window.pageYOffset;
-                    const shapes = document.querySelectorAll('.bg-shape');
-                    
-                    if (shapes.length > 0) {
-                        shapes[0].style.transform = `translateY(${scrolled * 0.5}px) rotate(${scrolled * 0.1}deg)`;
-                        if (shapes.length > 1) {
-                            shapes[1].style.transform = `translateY(${scrolled * 0.3}px) rotate(-${scrolled * 0.05}deg)`;
-                        }
-                    }
-                };
-                
-                window.addEventListener('scroll', handleScroll);
-                return () => window.removeEventListener('scroll', handleScroll);
-            }, []);
-            
+
+            const toggleFullscreen = () => {
+                setIsFullscreen(!isFullscreen);
+            };
+
             return (
                 <>
-                    <ThemeToggle isDark={isDark} toggleTheme={toggleTheme} />
-                    
-                    <div className="bg-shape shape-1"></div>
-                    <div className="bg-shape shape-2"></div>
-                    
-                    <div className="container">
-                        <header>
-                            <div className="logo">
-                                <div className="logo-icon">
-                                    <i className="fas fa-table"></i>
+                    {/* Header */}
+                    <header>
+                        <div className="logo-area">
+                            <i className="fas fa-table logo-icon"></i>
+                            <div>
+                                <h1>Presentation Helper</h1>
+                            </div>
+                            <span className="subtitle">Section I - Slide Linker</span>
+                        </div>
+                        <button className="theme-toggle" onClick={toggleTheme} title="Toggle Theme">
+                            <i className={isDark ? "fas fa-sun" : "fas fa-moon"}></i>
+                        </button>
+                    </header>
+
+                    {/* Main Content */}
+                    <div className="main-container">
+                        <div className={`sheet-wrapper ${isFullscreen ? 'is-fullscreen' : ''}`}>
+                            
+                            {/* Toolbar */}
+                            <div className="toolbar">
+                                <div className="toolbar-title">
+                                    <span className="status-dot"></span>
+                                    <span>Live Data Connection</span>
                                 </div>
-                                <div>
-                                    <h1>Presentation Helper For 45-I</h1>
-                                    <p className="subtitle">Slide Linker for Section I</p>
+                                <div className="actions">
+                                    <button onClick={handleRefresh} title="Reload Sheet">
+                                        <i className={`fas fa-sync-alt ${isLoading ? 'fa-spin' : ''}`}></i>
+                                        <span>Refresh</span>
+                                    </button>
+                                    <a href="https://docs.google.com/spreadsheets/d/1ZtemLdXt5RWd_0BPZSdFo6ftUlCV-9zjqarWru9cVvk/edit" target="_blank" rel="noopener noreferrer">
+                                        <button title="Open in Google Sheets">
+                                            <i className="fas fa-external-link-alt"></i>
+                                            <span>Open External</span>
+                                        </button>
+                                    </a>
+                                    <button className="btn-primary" onClick={toggleFullscreen} title="Toggle Fullscreen">
+                                        <i className={isFullscreen ? "fas fa-compress" : "fas fa-expand"}></i>
+                                        <span>{isFullscreen ? "Exit Full" : "Fullscreen"}</span>
+                                    </button>
                                 </div>
                             </div>
-                        </header>
-                        
-                        <div className="content">
-                            <SheetInfo />
-                            <SheetContainer />
-                            <Features />
-                            <Instructions />
+
+                            {/* Iframe Area */}
+                            <div className="iframe-container">
+                                {isLoading && (
+                                    <div className="loader-overlay">
+                                        <div className="spinner"></div>
+                                    </div>
+                                )}
+                                <iframe 
+                                    key={refreshKey}
+                                    src={sheetUrl} 
+                                    title="Google Sheet Embed"
+                                    allow="fullscreen"
+                                ></iframe>
+                            </div>
                         </div>
-                        
-                        <Footer />
                     </div>
-                    
-                    <Toast show={toast.show} message={toast.message} />
                 </>
             );
         }
         
-        // Render the App
         ReactDOM.render(<App />, document.getElementById('root'));
     </script>
 </body>
